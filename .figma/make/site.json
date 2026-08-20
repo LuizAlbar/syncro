@@ -1,0 +1,10 @@
+{
+  "description": "Manage your personal and financial goals effortlessly with a sleek dashboard that tracks tasks, budgets, and progress in a modern, user-friendly interface.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
