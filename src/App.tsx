@@ -1,12 +1,14 @@
+"use client";
+
 import { useState } from "react";
 
-// ─── Types ──────────────────────────────────────────────────────────────────
+// ─── Tipos ──────────────────────────────────────────────────────────────────
 
 type View = "dashboard" | "financials" | "goals" | "tasks";
 type TaskView = "list" | "kanban";
 type GoalFilter = "all" | "inprogress" | "financial" | "milestone" | "completed";
 
-// ─── Icons ──────────────────────────────────────────────────────────────────
+// ─── Ícones ──────────────────────────────────────────────────────────────────
 
 function IconCompass() {
   return (
@@ -122,7 +124,7 @@ function IconClock() {
   );
 }
 
-// ─── Shared Components ───────────────────────────────────────────────────────
+// ─── Componentes Compartilhados ─────────────────────────────────────────────
 
 function ProgressBar({ value, color = "#315d68", height = 6 }: { value: number; color?: string; height?: number }) {
   return (
@@ -176,19 +178,19 @@ function Badge({ label, color = "#315d68", textColor = "#dcd6dc" }: { label: str
   );
 }
 
-function PriorityBadge({ level }: { level: "High" | "Med" | "Low" }) {
-  const colors = { High: "#e05252", Med: "#d4914a", Low: "#4a9d6a" };
+function PriorityBadge({ level }: { level: "Alta" | "Média" | "Baixa" }) {
+  const colors = { Alta: "#e05252", Média: "#d4914a", Baixa: "#4a9d6a" };
   return <Badge label={level} color={colors[level]} textColor={colors[level]} />;
 }
 
 // ─── Sidebar ─────────────────────────────────────────────────────────────────
 
 function Sidebar({ active, onNav }: { active: View; onNav: (v: View) => void }) {
-  const links: { id: View; label: string; icon: JSX.Element }[] = [
-    { id: "dashboard", label: "Dashboard", icon: <IconGrid /> },
-    { id: "financials", label: "Financials", icon: <IconWallet /> },
-    { id: "goals", label: "Goals", icon: <IconTarget /> },
-    { id: "tasks", label: "Tasks / To-Do", icon: <IconCheck /> },
+  const links: { id: View; label: string; icon: React.ReactNode }[] = [
+    { id: "dashboard", label: "Painel", icon: <IconGrid /> },
+    { id: "financials", label: "Financeiro", icon: <IconWallet /> },
+    { id: "goals", label: "Metas", icon: <IconTarget /> },
+    { id: "tasks", label: "Tarefas / A Fazer", icon: <IconCheck /> },
   ];
 
   return (
@@ -211,7 +213,7 @@ function Sidebar({ active, onNav }: { active: View; onNav: (v: View) => void }) 
           <div style={{ color: "#dcd6dc", opacity: 0.9 }}><IconCompass /></div>
           <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 800, fontSize: 17, letterSpacing: "0.12em", color: "#dcd6dc" }}>SYNCRO</span>
         </div>
-        <p style={{ marginTop: 6, fontSize: 11, color: "#9495a8", letterSpacing: "0.06em", marginBottom: 0 }}>Direction. Mastery. Time.</p>
+        <p style={{ marginTop: 6, fontSize: 11, color: "#9495a8", letterSpacing: "0.06em", marginBottom: 0 }}>Direção. Maestria. Tempo.</p>
       </div>
 
       {/* Nav */}
@@ -253,7 +255,7 @@ function Sidebar({ active, onNav }: { active: View; onNav: (v: View) => void }) 
 
       {/* Bottom */}
       <div style={{ padding: "16px 12px 24px", borderTop: "1px solid rgba(148,149,168,0.1)", display: "flex", flexDirection: "column", gap: 2 }}>
-        {[{ label: "Settings", icon: <IconSettings /> }, { label: "Notifications", icon: <IconBell /> }].map(({ label, icon }) => (
+        {[{ label: "Configurações", icon: <IconSettings /> }, { label: "Notificações", icon: <IconBell /> }].map(({ label, icon }) => (
           <button key={label} style={{
             display: "flex", alignItems: "center", gap: 10,
             padding: "9px 12px", borderRadius: 8, border: "none",
@@ -276,7 +278,7 @@ function Sidebar({ active, onNav }: { active: View; onNav: (v: View) => void }) 
           }}>JR</div>
           <div>
             <div style={{ fontSize: 13, fontWeight: 600, color: "#dcd6dc" }}>Jordan Reid</div>
-            <div style={{ fontSize: 11, color: "#9495a8" }}>Pro Plan</div>
+            <div style={{ fontSize: 11, color: "#9495a8" }}>Plano Pro</div>
           </div>
         </div>
       </div>
@@ -288,7 +290,7 @@ function Sidebar({ active, onNav }: { active: View; onNav: (v: View) => void }) 
 
 function TopBar({ title }: { title: string }) {
   const now = new Date();
-  const dateStr = now.toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+  const dateStr = now.toLocaleDateString("pt-BR", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
   return (
     <div style={{
       display: "flex", alignItems: "center", justifyContent: "space-between",
@@ -299,6 +301,7 @@ function TopBar({ title }: { title: string }) {
         <span style={{
           background: "rgba(49,93,104,0.3)", border: "1px solid rgba(49,93,104,0.5)",
           borderRadius: 6, padding: "3px 10px", fontSize: 11.5, color: "#9495a8", fontFamily: "'DM Mono', monospace",
+          textTransform: "capitalize",
         }}>{dateStr}</span>
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -308,7 +311,7 @@ function TopBar({ title }: { title: string }) {
           borderRadius: 8, padding: "8px 14px", color: "#9495a8",
         }}>
           <IconSearch />
-          <input placeholder="Search anything..." style={{
+          <input placeholder="Buscar qualquer coisa..." style={{
             background: "none", border: "none", outline: "none", color: "#dcd6dc",
             fontSize: 13, width: 180, fontFamily: "'Inter', sans-serif",
           }} />
@@ -323,7 +326,7 @@ function TopBar({ title }: { title: string }) {
           onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
           onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
         >
-          <IconPlus /> Quick Add
+          <IconPlus /> Adicionar Rápido
         </button>
       </div>
     </div>
@@ -357,10 +360,10 @@ function Sparkline({ data, color = "#315d68" }: { data: number[]; color?: string
   );
 }
 
-// ─── Area Chart ──────────────────────────────────────────────────────────────
+// ─── Grafico de Area ─────────────────────────────────────────────────────────
 
 function AreaChart({ income, expenses }: { income: number[]; expenses: number[] }) {
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
+  const months = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago"];
   const w = 100, h = 100;
   const maxVal = Math.max(...income, ...expenses);
   const toPath = (data: number[], fill: boolean) => {
@@ -398,11 +401,11 @@ function AreaChart({ income, expenses }: { income: number[]; expenses: number[] 
       <div style={{ display: "flex", gap: 16, marginTop: 10 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
           <div style={{ width: 12, height: 2, background: "#315d68", borderRadius: 1 }} />
-          <span style={{ fontSize: 11, color: "#9495a8" }}>Income</span>
+          <span style={{ fontSize: 11, color: "#9495a8" }}>Receitas</span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
           <div style={{ width: 12, height: 2, background: "#9495a8", borderRadius: 1 }} />
-          <span style={{ fontSize: 11, color: "#9495a8" }}>Expenses</span>
+          <span style={{ fontSize: 11, color: "#9495a8" }}>Despesas</span>
         </div>
       </div>
     </div>
@@ -414,55 +417,55 @@ function AreaChart({ income, expenses }: { income: number[]; expenses: number[] 
 const incomeData = [4800, 5100, 4600, 5300, 4900, 5200, 5500, 5200];
 const expensesData = [2400, 2600, 2200, 2900, 2700, 2840, 2600, 2840];
 
-type TaskItem = { id: number; text: string; priority: "High" | "Med" | "Low"; done: boolean; tag: string };
+type TaskItem = { id: number; text: string; priority: "Alta" | "Média" | "Baixa"; done: boolean; tag: string };
 
 function DashboardView() {
   const [tasks, setTasks] = useState<TaskItem[]>([
-    { id: 1, text: "Review Q3 investment allocation", priority: "High", done: false, tag: "Finance" },
-    { id: 2, text: "Complete reading — Atomic Habits ch. 7–9", priority: "Med", done: false, tag: "Learning" },
-    { id: 3, text: "Submit freelance invoice #2024-08", priority: "High", done: true, tag: "Work" },
-    { id: 4, text: "Schedule annual health checkup", priority: "Low", done: false, tag: "Health" },
-    { id: 5, text: "Update emergency fund target amount", priority: "Med", done: false, tag: "Finance" },
+    { id: 1, text: "Revisar alocação de investimentos do T3", priority: "Alta", done: false, tag: "Finanças" },
+    { id: 2, text: "Concluir leitura — Hábitos Atômicos caps. 7–9", priority: "Média", done: false, tag: "Aprendizado" },
+    { id: 3, text: "Enviar fatura de freelancer #2024-08", priority: "Alta", done: true, tag: "Trabalho" },
+    { id: 4, text: "Agendar check-up de saúde anual", priority: "Baixa", done: false, tag: "Saúde" },
+    { id: 5, text: "Atualizar valor meta do fundo de emergência", priority: "Média", done: false, tag: "Finanças" },
   ]);
 
   const toggle = (id: number) => setTasks(ts => ts.map(t => t.id === id ? { ...t, done: !t.done } : t));
 
   const txns = [
-    { date: "Aug 17", desc: "Spotify Premium", cat: "Subscriptions", amt: -9.99, status: "Paid" },
-    { date: "Aug 16", desc: "Freelance Payment — Apex Co.", cat: "Income", amt: +1800.00, status: "Paid" },
-    { date: "Aug 15", desc: "Whole Foods Market", cat: "Groceries", amt: -74.32, status: "Paid" },
-    { date: "Aug 14", desc: "AWS Monthly Billing", cat: "Software", amt: -22.48, status: "Pending" },
-    { date: "Aug 13", desc: "Rent — August", cat: "Housing", amt: -1650.00, status: "Paid" },
+    { date: "17 Ago", desc: "Spotify Premium", cat: "Assinaturas", amt: -9.99, status: "Pago" },
+    { date: "16 Ago", desc: "Pagamento Freelance — Apex Co.", cat: "Receitas", amt: +1800.00, status: "Pago" },
+    { date: "15 Ago", desc: "Supermercado Whole Foods", cat: "Alimentação", amt: -74.32, status: "Pago" },
+    { date: "14 Ago", desc: "Faturamento Mensal AWS", cat: "Software", amt: -22.48, status: "Pendente" },
+    { date: "13 Ago", desc: "Aluguel — Agosto", cat: "Moradia", amt: -1650.00, status: "Pago" },
   ];
 
   const goals = [
-    { label: "Emergency Fund", pct: 68, days: 42, color: "#315d68" },
-    { label: "Read 12 Books", pct: 66, days: 137, color: "#4a9d6a" },
-    { label: "New MacBook Pro", pct: 45, days: 21, color: "#d4914a" },
+    { label: "Fundo de Emergência", pct: 68, days: 42, color: "#315d68" },
+    { label: "Ler 12 Livros", pct: 66, days: 137, color: "#4a9d6a" },
+    { label: "Novo MacBook Pro", pct: 45, days: 21, color: "#d4914a" },
   ];
 
   const catColors: Record<string, string> = {
-    Subscriptions: "#9495a8", Income: "#4a9d6a", Groceries: "#d4914a",
-    Software: "#315d68", Housing: "#e05252",
+    Assinaturas: "#9495a8", Receitas: "#4a9d6a", Alimentação: "#d4914a",
+    Software: "#315d68", Moradia: "#e05252",
   };
 
   return (
     <div>
-      <TopBar title="Dashboard" />
+      <TopBar title="Painel" />
 
-      {/* Metric Cards */}
+      {/* Cartões Métricos */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginBottom: 24 }}>
         {/* Card 1 */}
         <Card>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
             <div>
-              <p style={labelStyle}>Total Balance</p>
-              <p style={{ ...bigNumStyle, marginBottom: 6 }}>$14,820<span style={{ fontSize: 20 }}>.00</span></p>
+              <p style={labelStyle}>Saldo Total</p>
+              <p style={{ ...bigNumStyle, marginBottom: 6 }}>$14.820<span style={{ fontSize: 20 }}>,00</span></p>
               <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
                 <span style={{ color: "#4a9d6a", display: "flex", alignItems: "center", gap: 3, fontSize: 12, fontWeight: 600 }}>
                   <IconTrendUp /> +8.4%
                 </span>
-                <span style={{ fontSize: 11, color: "#9495a8" }}>vs last month</span>
+                <span style={{ fontSize: 11, color: "#9495a8" }}>vs último mês</span>
               </div>
             </div>
             <Sparkline data={[12100, 12800, 13200, 12900, 13800, 14100, 14500, 14820]} />
@@ -471,57 +474,57 @@ function DashboardView() {
 
         {/* Card 2 */}
         <Card>
-          <p style={labelStyle}>Monthly Cashflow</p>
+          <p style={labelStyle}>Fluxo de Caixa Mensal</p>
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
             <div>
-              <p style={{ margin: 0, fontSize: 11, color: "#9495a8" }}>Income</p>
-              <p style={{ margin: 0, fontSize: 20, fontWeight: 700, color: "#4a9d6a", fontFamily: "'DM Mono', monospace" }}>$5,200</p>
+              <p style={{ margin: 0, fontSize: 11, color: "#9495a8" }}>Receitas</p>
+              <p style={{ margin: 0, fontSize: 20, fontWeight: 700, color: "#4a9d6a", fontFamily: "'DM Mono', monospace" }}>$5.200</p>
             </div>
             <div style={{ textAlign: "right" }}>
-              <p style={{ margin: 0, fontSize: 11, color: "#9495a8" }}>Expenses</p>
-              <p style={{ margin: 0, fontSize: 20, fontWeight: 700, color: "#e05252", fontFamily: "'DM Mono', monospace" }}>$2,840</p>
+              <p style={{ margin: 0, fontSize: 11, color: "#9495a8" }}>Despesas</p>
+              <p style={{ margin: 0, fontSize: 20, fontWeight: 700, color: "#e05252", fontFamily: "'DM Mono', monospace" }}>$2.840</p>
             </div>
           </div>
           <div style={{ position: "relative", height: 6, background: "rgba(148,149,168,0.12)", borderRadius: 3, overflow: "hidden" }}>
             <div style={{ position: "absolute", left: 0, top: 0, height: "100%", width: "100%", background: "#4a9d6a", borderRadius: 3 }} />
             <div style={{ position: "absolute", left: 0, top: 0, height: "100%", width: `${(2840 / 5200) * 100}%`, background: "#e05252", borderRadius: 3 }} />
           </div>
-          <p style={{ margin: "8px 0 0", fontSize: 11, color: "#9495a8" }}>Net: <span style={{ color: "#4a9d6a", fontWeight: 600 }}>+$2,360</span> this month</p>
+          <p style={{ margin: "8px 0 0", fontSize: 11, color: "#9495a8" }}>Líquido: <span style={{ color: "#4a9d6a", fontWeight: 600 }}>+$2.360</span> este mês</p>
         </Card>
 
         {/* Card 3 */}
         <Card>
-          <p style={labelStyle}>Active Goals</p>
-          <p style={{ ...bigNumStyle, marginBottom: 4 }}>4 <span style={{ fontSize: 16, fontWeight: 400, color: "#9495a8" }}>in progress</span></p>
+          <p style={labelStyle}>Metas Ativas</p>
+          <p style={{ ...bigNumStyle, marginBottom: 4 }}>4 <span style={{ fontSize: 16, fontWeight: 400, color: "#9495a8" }}>em andamento</span></p>
           <div style={{ display: "flex", gap: 8, marginTop: 8, flexWrap: "wrap" }}>
             <span style={{ background: "rgba(229,82,82,0.15)", border: "1px solid rgba(229,82,82,0.3)", borderRadius: 5, padding: "3px 9px", fontSize: 11.5, color: "#e05252", fontWeight: 500 }}>
-              1 due this week
+              1 vence esta semana
             </span>
             <span style={{ background: "rgba(74,157,106,0.15)", border: "1px solid rgba(74,157,106,0.3)", borderRadius: 5, padding: "3px 9px", fontSize: 11.5, color: "#4a9d6a", fontWeight: 500 }}>
-              2 on track
+              2 no prazo
             </span>
           </div>
         </Card>
       </div>
 
-      {/* Main Grid */}
+      {/* Grelha Principal */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 360px", gap: 16 }}>
-        {/* Left */}
+        {/* Esquerda */}
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          {/* Chart */}
+          {/* Gráfico */}
           <Card>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-              <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: "#dcd6dc" }}>Monthly Financial Overview</p>
-              <span style={{ fontSize: 11, color: "#9495a8", fontFamily: "'DM Mono', monospace" }}>Jan – Aug 2026</span>
+              <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: "#dcd6dc" }}>Visão Geral Financeira Mensal</p>
+              <span style={{ fontSize: 11, color: "#9495a8", fontFamily: "'DM Mono', monospace" }}>Jan – Ago 2026</span>
             </div>
             <AreaChart income={incomeData} expenses={expensesData} />
           </Card>
 
-          {/* Tasks */}
+          {/* Tarefas */}
           <Card>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-              <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: "#dcd6dc" }}>{"Today's Focus Tasks"}</p>
-              <span style={{ fontSize: 11, color: "#9495a8" }}>{tasks.filter(t => t.done).length}/{tasks.length} done</span>
+              <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: "#dcd6dc" }}>Tarefas em Foco Hoje</p>
+              <span style={{ fontSize: 11, color: "#9495a8" }}>{tasks.filter(t => t.done).length}/{tasks.length} concluídas</span>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
               {tasks.map(t => (
@@ -554,12 +557,12 @@ function DashboardView() {
           </Card>
         </div>
 
-        {/* Right */}
+        {/* Direita */}
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          {/* Goals */}
+          {/* Metas */}
           <Card>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-              <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: "#dcd6dc" }}>Upcoming Goals</p>
+              <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: "#dcd6dc" }}>Próximas Metas</p>
               <span style={{ color: "#9495a8", display: "flex" }}><IconArrowRight /></span>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
@@ -573,21 +576,21 @@ function DashboardView() {
                       color: "#9495a8", fontFamily: "'DM Mono', monospace",
                       display: "flex", alignItems: "center", gap: 3,
                     }}>
-                      <IconClock /> {g.days}d left
+                      <IconClock /> {g.days}d restantes
                     </span>
                   </div>
                   <ProgressBar value={g.pct} color={g.color} height={5} />
-                  <p style={{ margin: "4px 0 0", fontSize: 11, color: "#9495a8" }}>{g.pct}% complete</p>
+                  <p style={{ margin: "4px 0 0", fontSize: 11, color: "#9495a8" }}>{g.pct}% concluído</p>
                 </div>
               ))}
             </div>
           </Card>
 
-          {/* Transactions */}
+          {/* Transações */}
           <Card>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-              <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: "#dcd6dc" }}>Recent Transactions</p>
-              <span style={{ fontSize: 11, color: "#315d68", cursor: "pointer" }}>View all</span>
+              <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: "#dcd6dc" }}>Transações Recentes</p>
+              <span style={{ fontSize: 11, color: "#315d68", cursor: "pointer" }}>Ver tudo</span>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
               {txns.map((t, i) => (
@@ -629,38 +632,38 @@ function DashboardView() {
 
 function FinancialsView() {
   const [search, setSearch] = useState("");
-  const [cat, setCat] = useState("All");
+  const [cat, setCat] = useState("Tudo");
 
   const accounts = [
-    { label: "Checking Account", amount: 6820.44, change: "+$240", bank: "Chase Bank", color: "#315d68" },
-    { label: "Emergency Fund", amount: 5400.00, change: "+$200", bank: "High-Yield Savings", color: "#4a9d6a" },
-    { label: "Investment Portfolio", amount: 2599.56, change: "+$184", bank: "Fidelity", color: "#d4914a" },
+    { label: "Conta Corrente", amount: 6820.44, change: "+$240", bank: "Banco Chase", color: "#315d68" },
+    { label: "Fundo de Emergência", amount: 5400.00, change: "+$200", bank: "Poupança de Alto Rendimento", color: "#4a9d6a" },
+    { label: "Carteira de Investimentos", amount: 2599.56, change: "+$184", bank: "Fidelity", color: "#d4914a" },
   ];
 
   const txns = [
-    { date: "Aug 17", desc: "Spotify Premium", cat: "Subscriptions", account: "Checking", amt: -9.99, status: "Paid" },
-    { date: "Aug 16", desc: "Freelance Payment — Apex Co.", cat: "Income", account: "Checking", amt: +1800.00, status: "Paid" },
-    { date: "Aug 15", desc: "Whole Foods Market", cat: "Groceries", account: "Checking", amt: -74.32, status: "Paid" },
-    { date: "Aug 14", desc: "AWS Monthly Billing", cat: "Software", account: "Checking", amt: -22.48, status: "Pending" },
-    { date: "Aug 13", desc: "Rent — August", cat: "Housing", account: "Checking", amt: -1650.00, status: "Paid" },
-    { date: "Aug 12", desc: "Fidelity Auto-Invest", cat: "Investing", account: "Investment", amt: -300.00, status: "Paid" },
-    { date: "Aug 11", desc: "Electric Bill", cat: "Utilities", account: "Checking", amt: -88.60, status: "Paid" },
-    { date: "Aug 10", desc: "Salary Deposit", cat: "Income", account: "Checking", amt: +3400.00, status: "Paid" },
-    { date: "Aug 09", desc: "Emergency Fund Transfer", cat: "Savings", account: "Savings", amt: +200.00, status: "Paid" },
-    { date: "Aug 08", desc: "Netflix", cat: "Subscriptions", account: "Checking", amt: -15.49, status: "Paid" },
+    { date: "17 Ago", desc: "Spotify Premium", cat: "Assinaturas", account: "Corrente", amt: -9.99, status: "Pago" },
+    { date: "16 Ago", desc: "Pagamento Freelance — Apex Co.", cat: "Receitas", account: "Corrente", amt: +1800.00, status: "Pago" },
+    { date: "15 Ago", desc: "Supermercado Whole Foods", cat: "Alimentação", account: "Corrente", amt: -74.32, status: "Pago" },
+    { date: "14 Ago", desc: "Faturamento Mensal AWS", cat: "Software", account: "Corrente", amt: -22.48, status: "Pendente" },
+    { date: "13 Ago", desc: "Aluguel — Agosto", cat: "Moradia", account: "Corrente", amt: -1650.00, status: "Pago" },
+    { date: "12 Ago", desc: "Fidelity Auto-Investimento", cat: "Investimentos", account: "Investimento", amt: -300.00, status: "Pago" },
+    { date: "11 Ago", desc: "Conta de Luz", cat: "Utilidades", account: "Corrente", amt: -88.60, status: "Pago" },
+    { date: "10 Ago", desc: "Depósito de Salário", cat: "Receitas", account: "Corrente", amt: +3400.00, status: "Pago" },
+    { date: "09 Ago", desc: "Transferência Fundo de Emergência", cat: "Poupança", account: "Poupança", amt: +200.00, status: "Pago" },
+    { date: "08 Ago", desc: "Netflix", cat: "Assinaturas", account: "Corrente", amt: -15.49, status: "Pago" },
   ];
 
-  const cats = ["All", "Income", "Housing", "Groceries", "Subscriptions", "Software", "Investing", "Utilities", "Savings"];
-  const catColors: Record<string, string> = { Income: "#4a9d6a", Housing: "#e05252", Groceries: "#d4914a", Subscriptions: "#9495a8", Software: "#315d68", Investing: "#a78bfa", Utilities: "#60a5fa", Savings: "#34d399" };
+  const cats = ["Tudo", "Receitas", "Moradia", "Alimentação", "Assinaturas", "Software", "Investimentos", "Utilidades", "Poupança"];
+  const catColors: Record<string, string> = { Receitas: "#4a9d6a", Moradia: "#e05252", Alimentação: "#d4914a", Assinaturas: "#9495a8", Software: "#315d68", Investimentos: "#a78bfa", Utilidades: "#60a5fa", Poupança: "#34d399" };
 
   const filtered = txns.filter(t =>
-    (cat === "All" || t.cat === cat) &&
+    (cat === "Tudo" || t.cat === cat) &&
     t.desc.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <div>
-      <TopBar title="Financials" />
+      <TopBar title="Financeiro" />
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginBottom: 24 }}>
         {accounts.map(a => (
@@ -669,7 +672,7 @@ function FinancialsView() {
               <div>
                 <p style={labelStyle}>{a.label}</p>
                 <p style={{ ...bigNumStyle, fontSize: 26 }}>${a.amount.toLocaleString("en-US", { minimumFractionDigits: 2 })}</p>
-                <p style={{ margin: 0, fontSize: 12, color: "#4a9d6a" }}>{a.change} this month</p>
+                <p style={{ margin: 0, fontSize: 12, color: "#4a9d6a" }}>{a.change} este mês</p>
               </div>
               <div style={{ width: 10, height: 10, borderRadius: "50%", background: a.color, marginTop: 4 }} />
             </div>
@@ -678,16 +681,16 @@ function FinancialsView() {
         ))}
       </div>
 
-      {/* Filter bar */}
+      {/* Barra de filtros */}
       <Card style={{ marginBottom: 16 }}>
         <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, background: "rgba(148,149,168,0.06)", border: "1px solid rgba(148,149,168,0.15)", borderRadius: 7, padding: "7px 12px", flex: 1, minWidth: 160 }}>
             <IconSearch />
-            <input placeholder="Search transactions..." value={search} onChange={e => setSearch(e.target.value)}
+            <input placeholder="Buscar transações..." value={search} onChange={e => setSearch(e.target.value)}
               style={{ background: "none", border: "none", outline: "none", color: "#dcd6dc", fontSize: 13, width: "100%", fontFamily: "'Inter', sans-serif" }} />
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 7, background: "rgba(148,149,168,0.06)", border: "1px solid rgba(148,149,168,0.15)", borderRadius: 7, padding: "7px 12px", color: "#9495a8", fontSize: 13, cursor: "pointer" }}>
-            <IconFilter /> <span>Aug 2026</span> <IconChevronDown />
+            <IconFilter /> <span>Ago 2026</span> <IconChevronDown />
           </div>
           <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
             {cats.map(c => (
@@ -701,18 +704,18 @@ function FinancialsView() {
             ))}
           </div>
           <button style={{ display: "flex", alignItems: "center", gap: 5, background: "#315d68", border: "none", borderRadius: 7, padding: "8px 14px", color: "#dcd6dc", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>
-            <IconPlus /> New
+            <IconPlus /> Nova
           </button>
         </div>
       </Card>
 
-      {/* Table */}
+      {/* Tabela */}
       <Card>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
             <tr>
-              {["Date", "Description", "Category", "Account", "Amount", "Status"].map(h => (
-                <th key={h} style={{ padding: "8px 12px", textAlign: h === "Amount" ? "right" : "left", fontSize: 11, color: "#9495a8", fontWeight: 500, letterSpacing: "0.07em", textTransform: "uppercase", borderBottom: "1px solid rgba(148,149,168,0.12)", fontFamily: "'DM Mono', monospace" }}>{h}</th>
+              {["Data", "Descrição", "Categoria", "Conta", "Valor", "Status"].map(h => (
+                <th key={h} style={{ padding: "8px 12px", textAlign: h === "Valor" ? "right" : "left", fontSize: 11, color: "#9495a8", fontWeight: 500, letterSpacing: "0.07em", textTransform: "uppercase", borderBottom: "1px solid rgba(148,149,168,0.12)", fontFamily: "'DM Mono', monospace" }}>{h}</th>
               ))}
             </tr>
           </thead>
@@ -733,16 +736,16 @@ function FinancialsView() {
                 </td>
                 <td style={{ padding: "11px 12px" }}>
                   <span style={{
-                    background: t.status === "Paid" ? "rgba(74,157,106,0.15)" : "rgba(212,145,74,0.15)",
-                    color: t.status === "Paid" ? "#4a9d6a" : "#d4914a",
-                    border: `1px solid ${t.status === "Paid" ? "rgba(74,157,106,0.3)" : "rgba(212,145,74,0.3)"}`,
+                    background: t.status === "Pago" ? "rgba(74,157,106,0.15)" : "rgba(212,145,74,0.15)",
+                    color: t.status === "Pago" ? "#4a9d6a" : "#d4914a",
+                    border: `1px solid ${t.status === "Pago" ? "rgba(74,157,106,0.3)" : "rgba(212,145,74,0.3)"}`,
                     borderRadius: 4, padding: "2px 8px", fontSize: 11, fontWeight: 500,
                   }}>{t.status}</span>
                 </td>
               </tr>
             ))}
             {filtered.length === 0 && (
-              <tr><td colSpan={6} style={{ textAlign: "center", padding: "32px", color: "#9495a8", fontSize: 13 }}>No transactions match your filters.</td></tr>
+              <tr><td colSpan={6} style={{ textAlign: "center", padding: "32px", color: "#9495a8", fontSize: 13 }}>Nenhuma transação corresponde aos seus filtros.</td></tr>
             )}
           </tbody>
         </table>
@@ -764,65 +767,65 @@ function GoalsView() {
 
   const goals: Goal[] = [
     {
-      title: "Emergency Fund", cat: "Financial", catColor: "#315d68",
-      deadline: "Oct 31, 2026", current: 5400, target: 8000, unit: "$",
+      title: "Fundo de Emergência", cat: "Financeira", catColor: "#315d68",
+      deadline: "31 Out, 2026", current: 5400, target: 8000, unit: "$",
       pct: 68, status: "financial",
       milestones: [
-        { label: "$2,000 saved", done: true }, { label: "$4,000 saved", done: true },
-        { label: "$6,000 saved", done: false }, { label: "$8,000 saved", done: false },
+        { label: "$2.000 economizados", done: true }, { label: "$4.000 economizados", done: true },
+        { label: "$6.000 economizados", done: false }, { label: "$8.000 economizados", done: false },
       ],
     },
     {
-      title: "Read 12 Books in 2026", cat: "Milestone", catColor: "#a78bfa",
-      deadline: "Dec 31, 2026", current: 8, target: 12, unit: "books",
+      title: "Ler 12 Livros em 2026", cat: "Marco", catColor: "#a78bfa",
+      deadline: "31 Dez, 2026", current: 8, target: 12, unit: "livros",
       pct: 66, status: "milestone",
       milestones: [
-        { label: "4 books read", done: true }, { label: "8 books read", done: true },
-        { label: "10 books read", done: false }, { label: "12 books read", done: false },
+        { label: "4 livros lidos", done: true }, { label: "8 livros lidos", done: true },
+        { label: "10 livros lidos", done: false }, { label: "12 livros lidos", done: false },
       ],
     },
     {
-      title: "New MacBook Pro M4", cat: "Financial", catColor: "#315d68",
-      deadline: "Sep 07, 2026", current: 1100, target: 2449, unit: "$",
+      title: "Novo MacBook Pro M4", cat: "Financeira", catColor: "#315d68",
+      deadline: "07 Set, 2026", current: 1100, target: 2449, unit: "$",
       pct: 45, status: "financial",
       milestones: [
-        { label: "$500 saved", done: true }, { label: "$1,000 saved", done: true },
-        { label: "$1,500 saved", done: false }, { label: "$2,449 saved", done: false },
+        { label: "$500 economizados", done: true }, { label: "$1.000 economizados", done: true },
+        { label: "$1.500 economizados", done: false }, { label: "$2.449 economizados", done: false },
       ],
     },
     {
-      title: "Run a 10K Race", cat: "Milestone", catColor: "#a78bfa",
-      deadline: "Nov 15, 2026", current: 7, target: 10, unit: "km",
+      title: "Correr uma Corrida de 10K", cat: "Marco", catColor: "#a78bfa",
+      deadline: "15 Nov, 2026", current: 7, target: 10, unit: "km",
       pct: 70, status: "milestone",
       milestones: [
-        { label: "5K run completed", done: true }, { label: "7K run completed", done: true },
-        { label: "10K race day", done: false },
+        { label: "Corrida de 5K concluída", done: true }, { label: "Corrida de 7K concluída", done: true },
+        { label: "Dia da corrida de 10K", done: false },
       ],
     },
     {
-      title: "Max Out Roth IRA 2026", cat: "Financial", catColor: "#315d68",
-      deadline: "Dec 31, 2026", current: 4500, target: 7000, unit: "$",
+      title: "Maximizar Roth IRA 2026", cat: "Financeira", catColor: "#315d68",
+      deadline: "31 Dez, 2026", current: 4500, target: 7000, unit: "$",
       pct: 64, status: "financial",
       milestones: [
-        { label: "$2,000 contributed", done: true }, { label: "$4,000 contributed", done: true },
-        { label: "$7,000 contributed", done: false },
+        { label: "$2.000 contribuídos", done: true }, { label: "$4.000 contribuídos", done: true },
+        { label: "$7.000 contribuídos", done: false },
       ],
     },
     {
-      title: "Launch Side Project v1.0", cat: "Milestone", catColor: "#a78bfa",
-      deadline: "Aug 30, 2026", current: 1, target: 1, unit: "launch",
+      title: "Lançar Projeto Paralelo v1.0", cat: "Marco", catColor: "#a78bfa",
+      deadline: "30 Ago, 2026", current: 1, target: 1, unit: "lançamento",
       pct: 100, status: "completed",
       milestones: [
-        { label: "MVP built", done: true }, { label: "Beta testers", done: true },
-        { label: "v1.0 launched", done: true },
+        { label: "MVP construído", done: true }, { label: "Testadores beta", done: true },
+        { label: "v1.0 lançado", done: true },
       ],
     },
   ];
 
   const filters: { id: GoalFilter; label: string }[] = [
-    { id: "all", label: "All" }, { id: "inprogress", label: "In Progress" },
-    { id: "financial", label: "Financial" }, { id: "milestone", label: "Milestone" },
-    { id: "completed", label: "Completed" },
+    { id: "all", label: "Tudo" }, { id: "inprogress", label: "Em Andamento" },
+    { id: "financial", label: "Financeiras" }, { id: "milestone", label: "Marcos" },
+    { id: "completed", label: "Concluídas" },
   ];
 
   const visible = goals.filter(g => {
@@ -834,9 +837,9 @@ function GoalsView() {
 
   return (
     <div>
-      <TopBar title="Goals" />
+      <TopBar title="Metas" />
 
-      {/* Filter tabs */}
+      {/* Abas de filtro */}
       <div style={{ display: "flex", gap: 4, marginBottom: 20, padding: "4px", background: "rgba(148,149,168,0.06)", borderRadius: 10, width: "fit-content", border: "1px solid rgba(148,149,168,0.12)" }}>
         {filters.map(f => (
           <button key={f.id} onClick={() => setFilter(f.id)} style={{
@@ -870,7 +873,7 @@ function GoalCard({ goal }: { goal: { title: string; cat: string; catColor: stri
         <span style={{ fontSize: 11.5, color: "#9495a8", display: "flex", alignItems: "center", gap: 4 }}>
           <IconClock /> {goal.deadline}
         </span>
-        {isCompleted && <Badge label="Completed" color="#4a9d6a" textColor="#4a9d6a" />}
+        {isCompleted && <Badge label="Concluída" color="#4a9d6a" textColor="#4a9d6a" />}
       </div>
 
       <div>
@@ -883,7 +886,7 @@ function GoalCard({ goal }: { goal: { title: string; cat: string; catColor: stri
           </span>
         </div>
         <ProgressBar value={goal.pct} color={isCompleted ? "#4a9d6a" : "#315d68"} height={7} />
-        <p style={{ margin: "5px 0 0", fontSize: 11, color: "#9495a8" }}>{goal.pct}% complete</p>
+        <p style={{ margin: "5px 0 0", fontSize: 11, color: "#9495a8" }}>{goal.pct}% concluído</p>
       </div>
 
       <button onClick={() => setExpanded(e => !e)} style={{
@@ -892,7 +895,7 @@ function GoalCard({ goal }: { goal: { title: string; cat: string; catColor: stri
         borderRadius: 6, padding: "7px 10px", cursor: "pointer",
         color: "#9495a8", fontSize: 12, width: "100%",
       }}>
-        <span>Milestones ({goal.milestones.filter(m => m.done).length}/{goal.milestones.length})</span>
+        <span>Marcos ({goal.milestones.filter(m => m.done).length}/{goal.milestones.length} concluídos)</span>
         <span style={{ transform: expanded ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s" }}><IconChevronDown /></span>
       </button>
 
@@ -919,40 +922,40 @@ function GoalCard({ goal }: { goal: { title: string; cat: string; catColor: stri
 
 // ─── Tasks View ───────────────────────────────────────────────────────────────
 
-type Task = { id: number; text: string; priority: "High" | "Med" | "Low"; done: boolean; due: string; goal?: string; group: string; kanban: string };
+type Task = { id: number; text: string; priority: "Alta" | "Média" | "Baixa"; done: boolean; due: string; goal?: string; group: string; kanban: string };
 
 function TasksView() {
   const [viewMode, setViewMode] = useState<TaskView>("list");
   const [tasks, setTasks] = useState<Task[]>([
-    { id: 1, text: "Review Q3 investment allocation", priority: "High", done: false, due: "Aug 18", goal: "Max Roth IRA", group: "Today", kanban: "todo" },
-    { id: 2, text: "Submit freelance invoice #2024-08", priority: "High", done: false, due: "Aug 18", group: "Today", kanban: "todo" },
-    { id: 3, text: "Complete Atomic Habits ch. 7–9", priority: "Med", done: false, due: "Aug 19", goal: "Read 12 Books", group: "Next 7 Days", kanban: "inprogress" },
-    { id: 4, text: "Schedule 10K training run (7km)", priority: "Med", done: false, due: "Aug 20", goal: "Run 10K", group: "Next 7 Days", kanban: "inprogress" },
-    { id: 5, text: "Transfer $200 to emergency fund", priority: "High", done: false, due: "Aug 21", goal: "Emergency Fund", group: "Next 7 Days", kanban: "todo" },
-    { id: 6, text: "Annual health checkup appointment", priority: "Low", done: false, due: "Aug 22", group: "Next 7 Days", kanban: "todo" },
-    { id: 7, text: "Plan September budget allocation", priority: "Med", done: false, due: "Sep 01", group: "Later", kanban: "todo" },
-    { id: 8, text: "Research MacBook Pro M4 deals", priority: "Low", done: false, due: "Sep 05", goal: "New MacBook", group: "Later", kanban: "todo" },
-    { id: 9, text: "Create 2027 financial roadmap", priority: "Med", done: false, due: "Sep 15", group: "Later", kanban: "todo" },
-    { id: 10, text: "Update LinkedIn profile", priority: "Low", done: true, due: "Aug 16", group: "Today", kanban: "done" },
+    { id: 1, text: "Revisar alocação de investimentos do T3", priority: "Alta", done: false, due: "18 Ago", goal: "Roth IRA", group: "Hoje", kanban: "todo" },
+    { id: 2, text: "Enviar fatura de freelancer #2024-08", priority: "Alta", done: false, due: "18 Ago", group: "Hoje", kanban: "todo" },
+    { id: 3, text: "Concluir leitura — Hábitos Atômicos caps. 7–9", priority: "Média", done: false, due: "19 Ago", goal: "Ler 12 Livros", group: "Próximos 7 Dias", kanban: "inprogress" },
+    { id: 4, text: "Agendar treino de corrida 10K (7km)", priority: "Média", done: false, due: "20 Ago", goal: "Correr 10K", group: "Próximos 7 Dias", kanban: "inprogress" },
+    { id: 5, text: "Transferir $200 para o fundo de emergência", priority: "Alta", done: false, due: "21 Ago", goal: "Fundo de Emergência", group: "Próximos 7 Dias", kanban: "todo" },
+    { id: 6, text: "Agendar consulta de check-up de saúde anual", priority: "Baixa", done: false, due: "22 Ago", group: "Próximos 7 Dias", kanban: "todo" },
+    { id: 7, text: "Planejar alocação do orçamento de setembro", priority: "Média", done: false, due: "01 Set", group: "Mais Tarde", kanban: "todo" },
+    { id: 8, text: "Pesquisar ofertas do MacBook Pro M4", priority: "Baixa", done: false, due: "05 Set", goal: "Novo MacBook", group: "Mais Tarde", kanban: "todo" },
+    { id: 9, text: "Criar roadmap financeiro de 2027", priority: "Média", done: false, due: "15 Set", group: "Mais Tarde", kanban: "todo" },
+    { id: 10, text: "Atualizar perfil do LinkedIn", priority: "Baixa", done: true, due: "16 Ago", group: "Hoje", kanban: "done" },
   ]);
 
   const toggle = (id: number) => setTasks(ts => ts.map(t => t.id === id ? { ...t, done: !t.done } : t));
 
-  const groups = ["Today", "Next 7 Days", "Later"];
+  const groups = ["Hoje", "Próximos 7 Dias", "Mais Tarde"];
   const kanbanCols = [
-    { id: "todo", label: "To Do", color: "#9495a8" },
-    { id: "inprogress", label: "In Progress", color: "#d4914a" },
-    { id: "done", label: "Done", color: "#4a9d6a" },
+    { id: "todo", label: "A Fazer", color: "#9495a8" },
+    { id: "inprogress", label: "Em Andamento", color: "#d4914a" },
+    { id: "done", label: "Concluído", color: "#4a9d6a" },
   ];
 
   return (
     <div>
-      <TopBar title="Tasks & To-Do" />
+      <TopBar title="Tarefas / A Fazer" />
 
-      {/* View Toggle */}
+      {/* Alternância de Visualização */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
         <div style={{ display: "flex", gap: 2, background: "rgba(148,149,168,0.06)", border: "1px solid rgba(148,149,168,0.12)", borderRadius: 9, padding: 3 }}>
-          {[{ mode: "list" as TaskView, icon: <IconList />, label: "List" }, { mode: "kanban" as TaskView, icon: <IconKanban />, label: "Kanban" }].map(({ mode, icon, label }) => (
+          {[{ mode: "list" as TaskView, icon: <IconList />, label: "Lista" }, { mode: "kanban" as TaskView, icon: <IconKanban />, label: "Kanban" }].map(({ mode, icon, label }) => (
             <button key={mode} onClick={() => setViewMode(mode)} style={{
               display: "flex", alignItems: "center", gap: 6,
               padding: "7px 14px", borderRadius: 7, border: "none",
@@ -964,9 +967,9 @@ function TasksView() {
           ))}
         </div>
         <div style={{ display: "flex", gap: 6, fontSize: 12, color: "#9495a8" }}>
-          <span>{tasks.filter(t => !t.done).length} remaining</span>
+          <span>{tasks.filter(t => !t.done).length} restantes</span>
           <span style={{ opacity: 0.4 }}>·</span>
-          <span style={{ color: "#4a9d6a" }}>{tasks.filter(t => t.done).length} completed</span>
+          <span style={{ color: "#4a9d6a" }}>{tasks.filter(t => t.done).length} concluídas</span>
         </div>
       </div>
 
@@ -1084,13 +1087,13 @@ const bigNumStyle: React.CSSProperties = {
   fontFamily: "'DM Mono', monospace",
 };
 
-// ─── App Root ─────────────────────────────────────────────────────────────────
+// ─── Raiz do App ──────────────────────────────────────────────────────────────
 
 const viewTitles: Record<View, string> = {
-  dashboard: "Dashboard",
-  financials: "Financials",
-  goals: "Goals",
-  tasks: "Tasks & To-Do",
+  dashboard: "Painel",
+  financials: "Financeiro",
+  goals: "Metas",
+  tasks: "Tarefas e A Fazer",
 };
 
 export default function App() {
