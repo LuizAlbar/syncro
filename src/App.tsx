@@ -49,7 +49,7 @@ function IconCheck() {
 function IconSettings() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+      <circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93a10 10 0 0 0 0 14.14"/>
     </svg>
   );
 }
@@ -128,7 +128,7 @@ function IconClock() {
 
 function ProgressBar({ value, color = "#315d68", height = 6 }: { value: number; color?: string; height?: number }) {
   return (
-    <div style={{ height, background: "rgba(148,149,168,0.12)", borderRadius: height / 2, overflow: "hidden" }}>
+    <div style={{ height, background: "rgba(4, 70, 67, 0.08)", borderRadius: height / 2, overflow: "hidden" }}>
       <div
         style={{
           width: `${Math.min(100, value)}%`,
@@ -148,7 +148,7 @@ function CircularProgress({ value, size = 64, stroke = 5, color = "#315d68" }: {
   const offset = circ - (value / 100) * circ;
   return (
     <svg width={size} height={size} style={{ transform: "rotate(-90deg)" }}>
-      <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="rgba(148,149,168,0.12)" strokeWidth={stroke} />
+      <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="rgba(4, 70, 67, 0.08)" strokeWidth={stroke} />
       <circle
         cx={size / 2} cy={size / 2} r={r} fill="none"
         stroke={color} strokeWidth={stroke}
@@ -160,16 +160,16 @@ function CircularProgress({ value, size = 64, stroke = 5, color = "#315d68" }: {
   );
 }
 
-function Badge({ label, color = "#315d68", textColor = "#dcd6dc" }: { label: string; color?: string; textColor?: string }) {
+function Badge({ label, color = "#315d68", textColor = "#032228" }: { label: string; color?: string; textColor?: string }) {
   return (
     <span style={{
-      background: color + "33",
-      color: textColor === "#dcd6dc" ? color : textColor,
-      border: `1px solid ${color}44`,
+      background: color + "1a",
+      color: textColor === "#032228" ? color : textColor,
+      border: `1px solid ${color}33`,
       borderRadius: 4,
       padding: "2px 7px",
       fontSize: 11,
-      fontWeight: 500,
+      fontWeight: 600,
       letterSpacing: "0.02em",
       whiteSpace: "nowrap",
     }}>
@@ -297,29 +297,29 @@ function TopBar({ title }: { title: string }) {
       marginBottom: 28, flexWrap: "wrap", gap: 12,
     }}>
       <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-        <h1 style={{ margin: 0, fontSize: 22, fontWeight: 700, color: "#dcd6dc", letterSpacing: "-0.01em" }}>{title}</h1>
+        <h1 style={{ margin: 0, fontSize: 22, fontWeight: 700, color: "#032228", letterSpacing: "-0.01em" }}>{title}</h1>
         <span style={{
-          background: "rgba(49,93,104,0.3)", border: "1px solid rgba(49,93,104,0.5)",
-          borderRadius: 6, padding: "3px 10px", fontSize: 11.5, color: "#9495a8", fontFamily: "'DM Mono', monospace",
+          background: "rgba(4, 70, 67, 0.06)", border: "1px solid rgba(4, 70, 67, 0.15)",
+          borderRadius: 6, padding: "3px 10px", fontSize: 11.5, color: "#044643", fontFamily: "'DM Mono', monospace",
           textTransform: "capitalize",
         }}>{dateStr}</span>
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
         <div style={{
           display: "flex", alignItems: "center", gap: 8,
-          background: "rgba(148,149,168,0.06)", border: "1px solid rgba(148,149,168,0.15)",
-          borderRadius: 8, padding: "8px 14px", color: "#9495a8",
+          background: "#ffffff", border: "1px solid rgba(4, 70, 67, 0.12)",
+          borderRadius: 8, padding: "8px 14px", color: "#5c757a",
         }}>
           <IconSearch />
           <input placeholder="Buscar qualquer coisa..." style={{
-            background: "none", border: "none", outline: "none", color: "#dcd6dc",
+            background: "none", border: "none", outline: "none", color: "#032228",
             fontSize: 13, width: 180, fontFamily: "'Inter', sans-serif",
           }} />
         </div>
         <button style={{
           display: "flex", alignItems: "center", gap: 6,
-          background: "#315d68", border: "none", borderRadius: 8,
-          padding: "9px 16px", color: "#dcd6dc", fontSize: 13,
+          background: "#044643", border: "none", borderRadius: 8,
+          padding: "9px 16px", color: "#ffffff", fontSize: 13,
           fontWeight: 600, cursor: "pointer", letterSpacing: "0.01em",
           transition: "opacity 0.15s",
         }}
@@ -396,16 +396,16 @@ function AreaChart({ income, expenses }: { income: number[]; expenses: number[] 
         <path d={toPath(income, false)} fill="none" stroke="#315d68" strokeWidth="1.5" strokeLinecap="round" />
       </svg>
       <div style={{ display: "flex", justifyContent: "space-between", marginTop: 4 }}>
-        {months.map(m => <span key={m} style={{ fontSize: 10, color: "#9495a8", fontFamily: "'DM Mono', monospace" }}>{m}</span>)}
+        {months.map(m => <span key={m} style={{ fontSize: 10, color: "#5c757a", fontFamily: "'DM Mono', monospace" }}>{m}</span>)}
       </div>
       <div style={{ display: "flex", gap: 16, marginTop: 10 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
           <div style={{ width: 12, height: 2, background: "#315d68", borderRadius: 1 }} />
-          <span style={{ fontSize: 11, color: "#9495a8" }}>Receitas</span>
+          <span style={{ fontSize: 11, color: "#5c757a" }}>Receitas</span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
           <div style={{ width: 12, height: 2, background: "#9495a8", borderRadius: 1 }} />
-          <span style={{ fontSize: 11, color: "#9495a8" }}>Despesas</span>
+          <span style={{ fontSize: 11, color: "#5c757a" }}>Despesas</span>
         </div>
       </div>
     </div>
@@ -465,7 +465,7 @@ function DashboardView() {
                 <span style={{ color: "#4a9d6a", display: "flex", alignItems: "center", gap: 3, fontSize: 12, fontWeight: 600 }}>
                   <IconTrendUp /> +8.4%
                 </span>
-                <span style={{ fontSize: 11, color: "#9495a8" }}>vs último mês</span>
+                <span style={{ fontSize: 11, color: "#5c757a" }}>vs último mês</span>
               </div>
             </div>
             <Sparkline data={[12100, 12800, 13200, 12900, 13800, 14100, 14500, 14820]} />
@@ -477,30 +477,30 @@ function DashboardView() {
           <p style={labelStyle}>Fluxo de Caixa Mensal</p>
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
             <div>
-              <p style={{ margin: 0, fontSize: 11, color: "#9495a8" }}>Receitas</p>
+              <p style={{ margin: 0, fontSize: 11, color: "#5c757a" }}>Receitas</p>
               <p style={{ margin: 0, fontSize: 20, fontWeight: 700, color: "#4a9d6a", fontFamily: "'DM Mono', monospace" }}>$5.200</p>
             </div>
             <div style={{ textAlign: "right" }}>
-              <p style={{ margin: 0, fontSize: 11, color: "#9495a8" }}>Despesas</p>
+              <p style={{ margin: 0, fontSize: 11, color: "#5c757a" }}>Despesas</p>
               <p style={{ margin: 0, fontSize: 20, fontWeight: 700, color: "#e05252", fontFamily: "'DM Mono', monospace" }}>$2.840</p>
             </div>
           </div>
-          <div style={{ position: "relative", height: 6, background: "rgba(148,149,168,0.12)", borderRadius: 3, overflow: "hidden" }}>
+          <div style={{ position: "relative", height: 6, background: "rgba(4, 70, 67, 0.08)", borderRadius: 3, overflow: "hidden" }}>
             <div style={{ position: "absolute", left: 0, top: 0, height: "100%", width: "100%", background: "#4a9d6a", borderRadius: 3 }} />
             <div style={{ position: "absolute", left: 0, top: 0, height: "100%", width: `${(2840 / 5200) * 100}%`, background: "#e05252", borderRadius: 3 }} />
           </div>
-          <p style={{ margin: "8px 0 0", fontSize: 11, color: "#9495a8" }}>Líquido: <span style={{ color: "#4a9d6a", fontWeight: 600 }}>+$2.360</span> este mês</p>
+          <p style={{ margin: "8px 0 0", fontSize: 11, color: "#5c757a" }}>Líquido: <span style={{ color: "#4a9d6a", fontWeight: 600 }}>+$2.360</span> este mês</p>
         </Card>
 
         {/* Card 3 */}
         <Card>
           <p style={labelStyle}>Metas Ativas</p>
-          <p style={{ ...bigNumStyle, marginBottom: 4 }}>4 <span style={{ fontSize: 16, fontWeight: 400, color: "#9495a8" }}>em andamento</span></p>
+          <p style={{ ...bigNumStyle, marginBottom: 4 }}>4 <span style={{ fontSize: 16, fontWeight: 400, color: "#5c757a" }}>em andamento</span></p>
           <div style={{ display: "flex", gap: 8, marginTop: 8, flexWrap: "wrap" }}>
-            <span style={{ background: "rgba(229,82,82,0.15)", border: "1px solid rgba(229,82,82,0.3)", borderRadius: 5, padding: "3px 9px", fontSize: 11.5, color: "#e05252", fontWeight: 500 }}>
+            <span style={{ background: "rgba(229,82,82,0.1)", border: "1px solid rgba(229,82,82,0.2)", borderRadius: 5, padding: "3px 9px", fontSize: 11.5, color: "#e05252", fontWeight: 500 }}>
               1 vence esta semana
             </span>
-            <span style={{ background: "rgba(74,157,106,0.15)", border: "1px solid rgba(74,157,106,0.3)", borderRadius: 5, padding: "3px 9px", fontSize: 11.5, color: "#4a9d6a", fontWeight: 500 }}>
+            <span style={{ background: "rgba(74,157,106,0.1)", border: "1px solid rgba(74,157,106,0.2)", borderRadius: 5, padding: "3px 9px", fontSize: 11.5, color: "#4a9d6a", fontWeight: 500 }}>
               2 no prazo
             </span>
           </div>
@@ -514,8 +514,8 @@ function DashboardView() {
           {/* Gráfico */}
           <Card>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-              <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: "#dcd6dc" }}>Visão Geral Financeira Mensal</p>
-              <span style={{ fontSize: 11, color: "#9495a8", fontFamily: "'DM Mono', monospace" }}>Jan – Ago 2026</span>
+              <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: "#032228" }}>Visão Geral Financeira Mensal</p>
+              <span style={{ fontSize: 11, color: "#5c757a", fontFamily: "'DM Mono', monospace" }}>Jan – Ago 2026</span>
             </div>
             <AreaChart income={incomeData} expenses={expensesData} />
           </Card>
@@ -523,32 +523,32 @@ function DashboardView() {
           {/* Tarefas */}
           <Card>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-              <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: "#dcd6dc" }}>Tarefas em Foco Hoje</p>
-              <span style={{ fontSize: 11, color: "#9495a8" }}>{tasks.filter(t => t.done).length}/{tasks.length} concluídas</span>
+              <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: "#032228" }}>Tarefas em Foco Hoje</p>
+              <span style={{ fontSize: 11, color: "#5c757a" }}>{tasks.filter(t => t.done).length}/{tasks.length} concluídas</span>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
               {tasks.map(t => (
                 <div key={t.id} onClick={() => toggle(t.id)} style={{
                   display: "flex", alignItems: "center", gap: 12,
                   padding: "10px 12px", borderRadius: 8,
-                  background: "rgba(148,149,168,0.04)",
-                  border: "1px solid rgba(148,149,168,0.1)",
+                  background: "#f9fafb",
+                  border: "1px solid rgba(4, 70, 67, 0.06)",
                   cursor: "pointer", transition: "background 0.15s",
                   opacity: t.done ? 0.55 : 1,
                 }}
-                  onMouseEnter={e => (e.currentTarget.style.background = "rgba(148,149,168,0.08)")}
-                  onMouseLeave={e => (e.currentTarget.style.background = "rgba(148,149,168,0.04)")}
+                  onMouseEnter={e => (e.currentTarget.style.background = "rgba(4, 70, 67, 0.04)")}
+                  onMouseLeave={e => (e.currentTarget.style.background = "#f9fafb")}
                 >
                   <div style={{
                     width: 18, height: 18, borderRadius: 5, border: "1.5px solid",
-                    borderColor: t.done ? "#315d68" : "rgba(148,149,168,0.35)",
+                    borderColor: t.done ? "#315d68" : "rgba(4, 70, 67, 0.25)",
                     background: t.done ? "#315d68" : "transparent",
                     display: "flex", alignItems: "center", justifyContent: "center",
                     flexShrink: 0, transition: "all 0.15s",
                   }}>
-                    {t.done && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#dcd6dc" strokeWidth="3" strokeLinecap="round"><polyline points="20 6 9 17 4 12" /></svg>}
+                    {t.done && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="3" strokeLinecap="round"><polyline points="20 6 9 17 4 12" /></svg>}
                   </div>
-                  <span style={{ flex: 1, fontSize: 13, color: "#dcd6dc", textDecoration: t.done ? "line-through" : "none" }}>{t.text}</span>
+                  <span style={{ flex: 1, fontSize: 13, color: "#032228", textDecoration: t.done ? "line-through" : "none" }}>{t.text}</span>
                   <PriorityBadge level={t.priority} />
                   <Badge label={t.tag} color="#315d68" />
                 </div>
@@ -562,25 +562,25 @@ function DashboardView() {
           {/* Metas */}
           <Card>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-              <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: "#dcd6dc" }}>Próximas Metas</p>
-              <span style={{ color: "#9495a8", display: "flex" }}><IconArrowRight /></span>
+              <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: "#032228" }}>Próximas Metas</p>
+              <span style={{ color: "#5c757a", display: "flex" }}><IconArrowRight /></span>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               {goals.map(g => (
                 <div key={g.label}>
                   <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
-                    <span style={{ fontSize: 13, color: "#dcd6dc", fontWeight: 500 }}>{g.label}</span>
+                    <span style={{ fontSize: 13, color: "#032228", fontWeight: 500 }}>{g.label}</span>
                     <span style={{
-                      background: "rgba(49,93,104,0.25)", border: "1px solid rgba(49,93,104,0.4)",
+                      background: "rgba(4, 70, 67, 0.06)", border: "1px solid rgba(4, 70, 67, 0.12)",
                       borderRadius: 4, padding: "1px 6px", fontSize: 10.5,
-                      color: "#9495a8", fontFamily: "'DM Mono', monospace",
+                      color: "#5c757a", fontFamily: "'DM Mono', monospace",
                       display: "flex", alignItems: "center", gap: 3,
                     }}>
                       <IconClock /> {g.days}d restantes
                     </span>
                   </div>
                   <ProgressBar value={g.pct} color={g.color} height={5} />
-                  <p style={{ margin: "4px 0 0", fontSize: 11, color: "#9495a8" }}>{g.pct}% concluído</p>
+                  <p style={{ margin: "4px 0 0", fontSize: 11, color: "#5c757a" }}>{g.pct}% concluído</p>
                 </div>
               ))}
             </div>
@@ -589,30 +589,30 @@ function DashboardView() {
           {/* Transações */}
           <Card>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-              <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: "#dcd6dc" }}>Transações Recentes</p>
-              <span style={{ fontSize: 11, color: "#315d68", cursor: "pointer" }}>Ver tudo</span>
+              <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: "#032228" }}>Transações Recentes</p>
+              <span style={{ fontSize: 11, color: "#044643", cursor: "pointer" }}>Ver tudo</span>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
               {txns.map((t, i) => (
                 <div key={i} style={{
                   display: "flex", alignItems: "center", justifyContent: "space-between",
-                  padding: "9px 0", borderBottom: i < txns.length - 1 ? "1px solid rgba(148,149,168,0.08)" : "none",
+                  padding: "9px 0", borderBottom: i < txns.length - 1 ? "1px solid rgba(4, 70, 67, 0.06)" : "none",
                 }}>
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <p style={{ margin: 0, fontSize: 12.5, color: "#dcd6dc", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{t.desc}</p>
+                    <p style={{ margin: 0, fontSize: 12.5, color: "#032228", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{t.desc}</p>
                     <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 2 }}>
-                      <span style={{ fontSize: 10.5, color: "#9495a8", fontFamily: "'DM Mono', monospace" }}>{t.date}</span>
-                      <span style={{ width: 3, height: 3, borderRadius: "50%", background: "#9495a8", opacity: 0.4 }} />
+                      <span style={{ fontSize: 10.5, color: "#5c757a", fontFamily: "'DM Mono', monospace" }}>{t.date}</span>
+                      <span style={{ width: 3, height: 3, borderRadius: "50%", background: "#5c757a", opacity: 0.4 }} />
                       <span style={{
-                        fontSize: 10, color: catColors[t.cat] || "#9495a8",
-                        background: (catColors[t.cat] || "#9495a8") + "22",
+                        fontSize: 10, color: catColors[t.cat] || "#5c757a",
+                        background: (catColors[t.cat] || "#5c757a") + "22",
                         padding: "1px 5px", borderRadius: 3,
                       }}>{t.cat}</span>
                     </div>
                   </div>
                   <span style={{
                     fontFamily: "'DM Mono', monospace", fontSize: 13, fontWeight: 500,
-                    color: t.amt > 0 ? "#4a9d6a" : "#dcd6dc",
+                    color: t.amt > 0 ? "#4a9d6a" : "#032228",
                     marginLeft: 8,
                   }}>
                     {t.amt > 0 ? "+" : ""}
@@ -671,12 +671,12 @@ function FinancialsView() {
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
               <div>
                 <p style={labelStyle}>{a.label}</p>
-                <p style={{ ...bigNumStyle, fontSize: 26 }}>${a.amount.toLocaleString("en-US", { minimumFractionDigits: 2 })}</p>
+                <p style={{ ...bigNumStyle, fontSize: 26, color: "#032228" }}>${a.amount.toLocaleString("en-US", { minimumFractionDigits: 2 })}</p>
                 <p style={{ margin: 0, fontSize: 12, color: "#4a9d6a" }}>{a.change} este mês</p>
               </div>
               <div style={{ width: 10, height: 10, borderRadius: "50%", background: a.color, marginTop: 4 }} />
             </div>
-            <p style={{ margin: "10px 0 0", fontSize: 11, color: "#9495a8" }}>{a.bank}</p>
+            <p style={{ margin: "10px 0 0", fontSize: 11, color: "#5c757a" }}>{a.bank}</p>
           </Card>
         ))}
       </div>
@@ -684,26 +684,26 @@ function FinancialsView() {
       {/* Barra de filtros */}
       <Card style={{ marginBottom: 16 }}>
         <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, background: "rgba(148,149,168,0.06)", border: "1px solid rgba(148,149,168,0.15)", borderRadius: 7, padding: "7px 12px", flex: 1, minWidth: 160 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, background: "#f9fafb", border: "1px solid rgba(4, 70, 67, 0.12)", borderRadius: 7, padding: "7px 12px", flex: 1, minWidth: 160 }}>
             <IconSearch />
             <input placeholder="Buscar transações..." value={search} onChange={e => setSearch(e.target.value)}
-              style={{ background: "none", border: "none", outline: "none", color: "#dcd6dc", fontSize: 13, width: "100%", fontFamily: "'Inter', sans-serif" }} />
+              style={{ background: "none", border: "none", outline: "none", color: "#032228", fontSize: 13, width: "100%", fontFamily: "'Inter', sans-serif" }} />
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 7, background: "rgba(148,149,168,0.06)", border: "1px solid rgba(148,149,168,0.15)", borderRadius: 7, padding: "7px 12px", color: "#9495a8", fontSize: 13, cursor: "pointer" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 7, background: "#f9fafb", border: "1px solid rgba(4, 70, 67, 0.12)", borderRadius: 7, padding: "7px 12px", color: "#5c757a", fontSize: 13, cursor: "pointer" }}>
             <IconFilter /> <span>Ago 2026</span> <IconChevronDown />
           </div>
           <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
             {cats.map(c => (
               <button key={c} onClick={() => setCat(c)} style={{
                 padding: "5px 12px", borderRadius: 6, border: "1px solid",
-                borderColor: cat === c ? "#315d68" : "rgba(148,149,168,0.2)",
-                background: cat === c ? "rgba(49,93,104,0.3)" : "transparent",
-                color: cat === c ? "#dcd6dc" : "#9495a8",
+                borderColor: cat === c ? "#044643" : "rgba(4, 70, 67, 0.12)",
+                background: cat === c ? "rgba(4, 70, 67, 0.08)" : "transparent",
+                color: cat === c ? "#032228" : "#5c757a",
                 fontSize: 12, cursor: "pointer", transition: "all 0.15s",
               }}>{c}</button>
             ))}
           </div>
-          <button style={{ display: "flex", alignItems: "center", gap: 5, background: "#315d68", border: "none", borderRadius: 7, padding: "8px 14px", color: "#dcd6dc", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>
+          <button style={{ display: "flex", alignItems: "center", gap: 5, background: "#044643", border: "none", borderRadius: 7, padding: "8px 14px", color: "#ffffff", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>
             <IconPlus /> Nova
           </button>
         </div>
@@ -715,23 +715,23 @@ function FinancialsView() {
           <thead>
             <tr>
               {["Data", "Descrição", "Categoria", "Conta", "Valor", "Status"].map(h => (
-                <th key={h} style={{ padding: "8px 12px", textAlign: h === "Valor" ? "right" : "left", fontSize: 11, color: "#9495a8", fontWeight: 500, letterSpacing: "0.07em", textTransform: "uppercase", borderBottom: "1px solid rgba(148,149,168,0.12)", fontFamily: "'DM Mono', monospace" }}>{h}</th>
+                <th key={h} style={{ padding: "8px 12px", textAlign: h === "Valor" ? "right" : "left", fontSize: 11, color: "#5c757a", fontWeight: 500, letterSpacing: "0.07em", textTransform: "uppercase", borderBottom: "1px solid rgba(4, 70, 67, 0.08)", fontFamily: "'DM Mono', monospace" }}>{h}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {filtered.map((t, i) => (
-              <tr key={i} style={{ borderBottom: "1px solid rgba(148,149,168,0.07)", transition: "background 0.1s" }}
-                onMouseEnter={e => (e.currentTarget.style.background = "rgba(148,149,168,0.04)")}
+              <tr key={i} style={{ borderBottom: "1px solid rgba(4, 70, 67, 0.06)", transition: "background 0.1s" }}
+                onMouseEnter={e => (e.currentTarget.style.background = "rgba(4, 70, 67, 0.02)")}
                 onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
               >
-                <td style={{ padding: "11px 12px", fontSize: 12, color: "#9495a8", fontFamily: "'DM Mono', monospace", whiteSpace: "nowrap" }}>{t.date}</td>
-                <td style={{ padding: "11px 12px", fontSize: 13, color: "#dcd6dc" }}>{t.desc}</td>
+                <td style={{ padding: "11px 12px", fontSize: 12, color: "#5c757a", fontFamily: "'DM Mono', monospace", whiteSpace: "nowrap" }}>{t.date}</td>
+                <td style={{ padding: "11px 12px", fontSize: 13, color: "#032228" }}>{t.desc}</td>
                 <td style={{ padding: "11px 12px" }}>
-                  <span style={{ background: (catColors[t.cat] || "#9495a8") + "22", color: catColors[t.cat] || "#9495a8", border: `1px solid ${(catColors[t.cat] || "#9495a8")}44`, borderRadius: 4, padding: "2px 8px", fontSize: 11, fontWeight: 500 }}>{t.cat}</span>
+                  <span style={{ background: (catColors[t.cat] || "#5c757a") + "22", color: catColors[t.cat] || "#5c757a", border: `1px solid ${(catColors[t.cat] || "#5c757a")}44`, borderRadius: 4, padding: "2px 8px", fontSize: 11, fontWeight: 500 }}>{t.cat}</span>
                 </td>
-                <td style={{ padding: "11px 12px", fontSize: 12, color: "#9495a8" }}>{t.account}</td>
-                <td style={{ padding: "11px 12px", textAlign: "right", fontFamily: "'DM Mono', monospace", fontSize: 13, fontWeight: 500, color: t.amt > 0 ? "#4a9d6a" : "#dcd6dc" }}>
+                <td style={{ padding: "11px 12px", fontSize: 12, color: "#5c757a" }}>{t.account}</td>
+                <td style={{ padding: "11px 12px", textAlign: "right", fontFamily: "'DM Mono', monospace", fontSize: 13, fontWeight: 500, color: t.amt > 0 ? "#4a9d6a" : "#032228" }}>
                   {t.amt > 0 ? "+" : ""}{t.amt.toLocaleString("en-US", { style: "currency", currency: "USD" })}
                 </td>
                 <td style={{ padding: "11px 12px" }}>
@@ -745,7 +745,7 @@ function FinancialsView() {
               </tr>
             ))}
             {filtered.length === 0 && (
-              <tr><td colSpan={6} style={{ textAlign: "center", padding: "32px", color: "#9495a8", fontSize: 13 }}>Nenhuma transação corresponde aos seus filtros.</td></tr>
+              <tr><td colSpan={6} style={{ textAlign: "center", padding: "32px", color: "#5c757a", fontSize: 13 }}>Nenhuma transação corresponde aos seus filtros.</td></tr>
             )}
           </tbody>
         </table>
@@ -840,12 +840,12 @@ function GoalsView() {
       <TopBar title="Metas" />
 
       {/* Abas de filtro */}
-      <div style={{ display: "flex", gap: 4, marginBottom: 20, padding: "4px", background: "rgba(148,149,168,0.06)", borderRadius: 10, width: "fit-content", border: "1px solid rgba(148,149,168,0.12)" }}>
+      <div style={{ display: "flex", gap: 4, marginBottom: 20, padding: "4px", background: "rgba(4, 70, 67, 0.04)", borderRadius: 10, width: "fit-content", border: "1px solid rgba(4, 70, 67, 0.08)" }}>
         {filters.map(f => (
           <button key={f.id} onClick={() => setFilter(f.id)} style={{
             padding: "7px 16px", borderRadius: 7, border: "none",
-            background: filter === f.id ? "#315d68" : "transparent",
-            color: filter === f.id ? "#dcd6dc" : "#9495a8",
+            background: filter === f.id ? "#044643" : "transparent",
+            color: filter === f.id ? "#ffffff" : "#5c757a",
             fontSize: 13, fontWeight: filter === f.id ? 600 : 400,
             cursor: "pointer", transition: "all 0.15s",
           }}>{f.label}</button>
@@ -865,12 +865,12 @@ function GoalCard({ goal }: { goal: { title: string; cat: string; catColor: stri
   return (
     <Card style={{ display: "flex", flexDirection: "column", gap: 12 }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-        <h3 style={{ margin: 0, fontSize: 14, fontWeight: 600, color: "#dcd6dc", lineHeight: 1.3 }}>{goal.title}</h3>
+        <h3 style={{ margin: 0, fontSize: 14, fontWeight: 600, color: "#032228", lineHeight: 1.3 }}>{goal.title}</h3>
         <Badge label={goal.cat} color={goal.catColor} />
       </div>
 
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <span style={{ fontSize: 11.5, color: "#9495a8", display: "flex", alignItems: "center", gap: 4 }}>
+        <span style={{ fontSize: 11.5, color: "#5c757a", display: "flex", alignItems: "center", gap: 4 }}>
           <IconClock /> {goal.deadline}
         </span>
         {isCompleted && <Badge label="Concluída" color="#4a9d6a" textColor="#4a9d6a" />}
@@ -878,22 +878,22 @@ function GoalCard({ goal }: { goal: { title: string; cat: string; catColor: stri
 
       <div>
         <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
-          <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 12, color: "#dcd6dc" }}>
+          <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 12, color: "#032228" }}>
             {goal.unit === "$" ? `$${goal.current.toLocaleString()}` : goal.current} {goal.unit !== "$" ? goal.unit : ""}
           </span>
-          <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 12, color: "#9495a8" }}>
+          <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 12, color: "#5c757a" }}>
             / {goal.unit === "$" ? `$${goal.target.toLocaleString()}` : `${goal.target} ${goal.unit}`}
           </span>
         </div>
         <ProgressBar value={goal.pct} color={isCompleted ? "#4a9d6a" : "#315d68"} height={7} />
-        <p style={{ margin: "5px 0 0", fontSize: 11, color: "#9495a8" }}>{goal.pct}% concluído</p>
+        <p style={{ margin: "5px 0 0", fontSize: 11, color: "#5c757a" }}>{goal.pct}% concluído</p>
       </div>
 
       <button onClick={() => setExpanded(e => !e)} style={{
         display: "flex", alignItems: "center", justifyContent: "space-between",
-        background: "rgba(148,149,168,0.05)", border: "1px solid rgba(148,149,168,0.1)",
+        background: "#f9fafb", border: "1px solid rgba(4, 70, 67, 0.06)",
         borderRadius: 6, padding: "7px 10px", cursor: "pointer",
-        color: "#9495a8", fontSize: 12, width: "100%",
+        color: "#5c757a", fontSize: 12, width: "100%",
       }}>
         <span>Marcos ({goal.milestones.filter(m => m.done).length}/{goal.milestones.length} concluídos)</span>
         <span style={{ transform: expanded ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s" }}><IconChevronDown /></span>
@@ -905,13 +905,13 @@ function GoalCard({ goal }: { goal: { title: string; cat: string; catColor: stri
             <div key={i} style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <div style={{
                 width: 16, height: 16, borderRadius: 4, border: "1.5px solid",
-                borderColor: m.done ? "#4a9d6a" : "rgba(148,149,168,0.3)",
+                borderColor: m.done ? "#4a9d6a" : "rgba(4, 70, 67, 0.2)",
                 background: m.done ? "rgba(74,157,106,0.2)" : "transparent",
                 display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
               }}>
                 {m.done && <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#4a9d6a" strokeWidth="3" strokeLinecap="round"><polyline points="20 6 9 17 4 12" /></svg>}
               </div>
-              <span style={{ fontSize: 12, color: m.done ? "#9495a8" : "#dcd6dc", textDecoration: m.done ? "line-through" : "none" }}>{m.label}</span>
+              <span style={{ fontSize: 12, color: m.done ? "#9495a8" : "#032228", textDecoration: m.done ? "line-through" : "none" }}>{m.label}</span>
             </div>
           ))}
         </div>
@@ -954,19 +954,19 @@ function TasksView() {
 
       {/* Alternância de Visualização */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
-        <div style={{ display: "flex", gap: 2, background: "rgba(148,149,168,0.06)", border: "1px solid rgba(148,149,168,0.12)", borderRadius: 9, padding: 3 }}>
+        <div style={{ display: "flex", gap: 2, background: "rgba(4, 70, 67, 0.04)", border: "1px solid rgba(4, 70, 67, 0.08)", borderRadius: 9, padding: 3 }}>
           {[{ mode: "list" as TaskView, icon: <IconList />, label: "Lista" }, { mode: "kanban" as TaskView, icon: <IconKanban />, label: "Kanban" }].map(({ mode, icon, label }) => (
             <button key={mode} onClick={() => setViewMode(mode)} style={{
               display: "flex", alignItems: "center", gap: 6,
               padding: "7px 14px", borderRadius: 7, border: "none",
-              background: viewMode === mode ? "#315d68" : "transparent",
-              color: viewMode === mode ? "#dcd6dc" : "#9495a8",
+              background: viewMode === mode ? "#044643" : "transparent",
+              color: viewMode === mode ? "#ffffff" : "#5c757a",
               fontSize: 13, fontWeight: viewMode === mode ? 600 : 400,
               cursor: "pointer", transition: "all 0.15s",
             }}>{icon} {label}</button>
           ))}
         </div>
-        <div style={{ display: "flex", gap: 6, fontSize: 12, color: "#9495a8" }}>
+        <div style={{ display: "flex", gap: 6, fontSize: 12, color: "#5c757a" }}>
           <span>{tasks.filter(t => !t.done).length} restantes</span>
           <span style={{ opacity: 0.4 }}>·</span>
           <span style={{ color: "#4a9d6a" }}>{tasks.filter(t => t.done).length} concluídas</span>
@@ -980,32 +980,32 @@ function TasksView() {
             return (
               <div key={g}>
                 <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
-                  <span style={{ fontSize: 12, fontWeight: 600, color: "#9495a8", letterSpacing: "0.08em", textTransform: "uppercase", fontFamily: "'DM Mono', monospace" }}>{g}</span>
-                  <span style={{ background: "rgba(148,149,168,0.12)", borderRadius: 10, padding: "1px 7px", fontSize: 11, color: "#9495a8" }}>{groupTasks.length}</span>
-                  <div style={{ flex: 1, height: 1, background: "rgba(148,149,168,0.1)" }} />
+                  <span style={{ fontSize: 12, fontWeight: 600, color: "#5c757a", letterSpacing: "0.08em", textTransform: "uppercase", fontFamily: "'DM Mono', monospace" }}>{g}</span>
+                  <span style={{ background: "rgba(4, 70, 67, 0.08)", borderRadius: 10, padding: "1px 7px", fontSize: 11, color: "#5c757a" }}>{groupTasks.length}</span>
+                  <div style={{ flex: 1, height: 1, background: "rgba(4, 70, 67, 0.08)" }} />
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                   {groupTasks.map(t => (
                     <div key={t.id} style={{
                       display: "flex", alignItems: "center", gap: 12,
                       padding: "11px 14px", borderRadius: 9,
-                      background: "rgba(4,70,67,0.5)", border: "1px solid rgba(148,149,168,0.1)",
+                      background: "#ffffff", border: "1px solid rgba(4, 70, 67, 0.06)",
                       opacity: t.done ? 0.5 : 1, transition: "opacity 0.15s",
                     }}>
                       <div onClick={() => toggle(t.id)} style={{
                         width: 18, height: 18, borderRadius: 5, border: "1.5px solid",
-                        borderColor: t.done ? "#315d68" : "rgba(148,149,168,0.35)",
+                        borderColor: t.done ? "#315d68" : "rgba(4, 70, 67, 0.25)",
                         background: t.done ? "#315d68" : "transparent",
                         display: "flex", alignItems: "center", justifyContent: "center",
                         flexShrink: 0, cursor: "pointer", transition: "all 0.15s",
                       }}>
-                        {t.done && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#dcd6dc" strokeWidth="3" strokeLinecap="round"><polyline points="20 6 9 17 4 12" /></svg>}
+                        {t.done && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="3" strokeLinecap="round"><polyline points="20 6 9 17 4 12" /></svg>}
                       </div>
-                      <span style={{ flex: 1, fontSize: 13, color: "#dcd6dc", textDecoration: t.done ? "line-through" : "none" }}>{t.text}</span>
+                      <span style={{ flex: 1, fontSize: 13, color: "#032228", textDecoration: t.done ? "line-through" : "none" }}>{t.text}</span>
                       <div style={{ display: "flex", alignItems: "center", gap: 7, flexShrink: 0 }}>
                         <PriorityBadge level={t.priority} />
                         {t.goal && <Badge label={t.goal} color="#315d68" />}
-                        <span style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 11, color: "#9495a8", fontFamily: "'DM Mono', monospace" }}>
+                        <span style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 11, color: "#5c757a", fontFamily: "'DM Mono', monospace" }}>
                           <IconClock /> {t.due}
                         </span>
                       </div>
@@ -1021,24 +1021,24 @@ function TasksView() {
           {kanbanCols.map(col => {
             const colTasks = tasks.filter(t => t.kanban === col.id);
             return (
-              <div key={col.id} style={{ background: "rgba(148,149,168,0.04)", border: "1px solid rgba(148,149,168,0.1)", borderRadius: 12, padding: 12 }}>
+              <div key={col.id} style={{ background: "#f9fafb", border: "1px solid rgba(4, 70, 67, 0.06)", borderRadius: 12, padding: 12 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
                   <div style={{ width: 8, height: 8, borderRadius: "50%", background: col.color }} />
-                  <span style={{ fontSize: 12, fontWeight: 600, color: "#dcd6dc", letterSpacing: "0.05em", textTransform: "uppercase", fontFamily: "'DM Mono', monospace" }}>{col.label}</span>
-                  <span style={{ background: "rgba(148,149,168,0.12)", borderRadius: 10, padding: "1px 7px", fontSize: 11, color: "#9495a8", marginLeft: "auto" }}>{colTasks.length}</span>
+                  <span style={{ fontSize: 12, fontWeight: 600, color: "#032228", letterSpacing: "0.05em", textTransform: "uppercase", fontFamily: "'DM Mono', monospace" }}>{col.label}</span>
+                  <span style={{ background: "rgba(4, 70, 67, 0.08)", borderRadius: 10, padding: "1px 7px", fontSize: 11, color: "#5c757a", marginLeft: "auto" }}>{colTasks.length}</span>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                   {colTasks.map(t => (
                     <div key={t.id} style={{
-                      background: "#044643", border: "1px solid rgba(148,149,168,0.12)",
+                      background: "#ffffff", border: "1px solid rgba(4, 70, 67, 0.08)",
                       borderRadius: 8, padding: 12,
                     }}>
-                      <p style={{ margin: "0 0 8px", fontSize: 13, color: "#dcd6dc", lineHeight: 1.4 }}>{t.text}</p>
+                      <p style={{ margin: "0 0 8px", fontSize: 13, color: "#032228", lineHeight: 1.4 }}>{t.text}</p>
                       <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
                         <PriorityBadge level={t.priority} />
                         {t.goal && <Badge label={t.goal} color="#315d68" />}
                       </div>
-                      <p style={{ margin: "8px 0 0", fontSize: 11, color: "#9495a8", fontFamily: "'DM Mono', monospace", display: "flex", alignItems: "center", gap: 4 }}>
+                      <p style={{ margin: "8px 0 0", fontSize: 11, color: "#5c757a", fontFamily: "'DM Mono', monospace", display: "flex", alignItems: "center", gap: 4 }}>
                         <IconClock /> {t.due}
                       </p>
                     </div>
@@ -1058,8 +1058,9 @@ function TasksView() {
 function Card({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
   return (
     <div style={{
-      background: "#044643",
-      border: "1px solid rgba(148,149,168,0.13)",
+      background: "#ffffff",
+      border: "1px solid rgba(4, 70, 67, 0.08)",
+      boxShadow: "0 1px 3px rgba(4, 70, 67, 0.04)",
       borderRadius: 12,
       padding: 20,
       ...style,
@@ -1072,7 +1073,7 @@ function Card({ children, style }: { children: React.ReactNode; style?: React.CS
 const labelStyle: React.CSSProperties = {
   margin: "0 0 4px",
   fontSize: 11.5,
-  color: "#9495a8",
+  color: "#5c757a",
   letterSpacing: "0.07em",
   textTransform: "uppercase",
   fontFamily: "'DM Mono', monospace",
@@ -1082,7 +1083,7 @@ const bigNumStyle: React.CSSProperties = {
   margin: 0,
   fontSize: 30,
   fontWeight: 700,
-  color: "#dcd6dc",
+  color: "#032228",
   letterSpacing: "-0.02em",
   fontFamily: "'DM Mono', monospace",
 };
@@ -1108,6 +1109,7 @@ export default function App() {
         padding: "32px 36px",
         overflowY: "auto",
         minHeight: "100vh",
+        background: "#f4f7f6",
       }}>
         {view === "dashboard" && <DashboardView />}
         {view === "financials" && <FinancialsView />}
