@@ -19,3 +19,4 @@ logs/
 /.plugins/
 /.opencode-skills/
 /.next
+seed.js
